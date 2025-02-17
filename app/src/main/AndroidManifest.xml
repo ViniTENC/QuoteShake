@@ -13,7 +13,19 @@
         android:theme="@style/Theme.QuoteShake"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.About"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Settings"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Favourites"
+            android:exported="false" />
+        <activity
+            android:name=".ui.NewQuotation"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

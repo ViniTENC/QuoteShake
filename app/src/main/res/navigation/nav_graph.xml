@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/nav_graph"
+    app:startDestination="@id/newQuotationFragment">
+
+    <dialog
+        android:id="@+id/aboutDialogFragment"
+        android:name="com.vtencon.quoteshake.ui.about.AboutDialogFragment"
+        android:label="AboutDialogFragment" />
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.vtencon.quoteshake.ui.favourites.FavouriteFragment"
+        android:label="FavouriteFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.vtencon.quoteshake.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/newQuotationFragment"
+        android:name="com.vtencon.quoteshake.ui.newquotation.NewQuotationFragment"
+        android:label="NewQuotationFragment" />
+</navigation>

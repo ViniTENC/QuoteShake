@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+    android:id="@+id/newQuotationFragment"
+    android:title="@string/new_quote"
+    android:icon="@drawable/baseline_account_box_24"
+        />
+    <item
+        android:id="@+id/favouriteFragment"
+        android:title="@string/favourite"
+        android:icon="@drawable/baseline_accessible_24"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/baseline_accessible_forward_24"
+        android:title="@string/settings" />
+</menu>
