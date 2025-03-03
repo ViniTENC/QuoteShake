@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,20 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.QuoteShake"
+        android:theme="@style/AppTheme"
+        android:name=".QuoteShakeApplication"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.About"
-            android:exported="false" />
-        <activity
-            android:name=".ui.Settings"
-            android:exported="false" />
-        <activity
-            android:name=".ui.Favourites"
-            android:exported="false" />
-        <activity
-            android:name=".ui.NewQuotation"
-            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -34,5 +25,11 @@
             </intent-filter>
         </activity>
     </application>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
+    </queries>
 
 </manifest>

@@ -15,10 +15,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.snackbar.Snackbar
 import com.vtencon.quoteshake.R
 import com.vtencon.quoteshake.databinding.FragmentNewQuotationBinding
+import com.vtencon.quoteshake.ui.utils.NoInternetException
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProvider {
     private val viewModel: NewQuotationViewModel by viewModels()
     private var _binding: FragmentNewQuotationBinding? = null
@@ -27,6 +30,9 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNewQuotationBinding.bind(view)
+
+        requireActivity().addMenuProvider(this,
+            viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         // Observa el estado de showMessage para actualizar la visibilidad de tvGreeting
         viewLifecycleOwner.lifecycleScope.launch {
@@ -45,27 +51,44 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
                 }
             }
         }
-
-        // Observa la nueva cita y actualiza el texto y el autor
+        // Asociar el SwipeRefreshLayout con el ViewModel para iniciar la carga de una nueva cita
+        binding.swipeToRefresh.setOnRefreshListener {
+            viewModel.getNewQuotation() // Llamar al método del ViewModel al refrescar
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.quotation.collect { quotation ->
-                    quotation?.let {
-                        val parts = it.split(",") // Suponiendo que la cita y el autor están separados por coma
-                        val quotationText = parts.getOrNull(1) ?: ""
-                        val authorText = parts.getOrNull(2)?.trim() ?: "Anonymous"
-                        binding.tvQuotationText.text = quotationText
-                        binding.tvQuotationAuthor.text = if (authorText.isEmpty()) "Anonymous" else authorText
+                    binding.tvQuotationText.text = quotation?.txt
+                    binding.tvQuotationAuthor.text = if (quotation?.author?.isEmpty() == true) "Anonymous" else quotation?.author
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.boton.collect { isVisible ->
+                    binding.fabFavourite.isVisible = isVisible
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.error.collect { error ->
+                    error?.let {
+                        val message = if (it is NoInternetException) {
+                            "No hay conexión a Internet. Verifica tu conexión e intenta de nuevo."
+                        } else {
+                            "Ocurrió un error al obtener la cotización."
+                        }
+
+                        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+                        viewModel.resetError()
                     }
                 }
             }
         }
-        // Asociar el SwipeRefreshLayout con el ViewModel para iniciar la carga de una nueva cita
-        binding.swipeToRefresh.setOnRefreshListener {
-            viewModel.getNewQuotation() // Llamar al método del ViewModel al refrescar
-            Log.d("NewQuotationFragment", "Se ha activado el refresco")
+        binding.fabFavourite.setOnClickListener {
+            viewModel.addToFavourites()
         }
-
     }
 
     override fun onDestroyView() {
@@ -78,8 +101,6 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        requireActivity().addMenuProvider(this,
-        viewLifecycleOwner, Lifecycle.State.RESUMED)
         return when (menuItem.itemId) {
             R.id.refreshManual-> {
                 // Llamamos a getNewQuotation() si el ítem seleccionado es el correcto

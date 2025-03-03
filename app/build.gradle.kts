@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -47,6 +49,15 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("com.google.dagger:hilt-android:2.50")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("androidx.preference:preference-ktx:1.2.1")
+    implementation(libs.androidx.preference)
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+    ksp("com.google.dagger:hilt-compiler:2.50")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

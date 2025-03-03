@@ -11,7 +11,11 @@
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.vtencon.quoteshake.ui.favourites.FavouriteFragment"
-        android:label="FavouriteFragment" />
+        android:label="FavouriteFragment" >
+        <action
+            android:id="@+id/action_favouritesFragment_to_deleteAllDialog"
+            app:destination="@id/deleteAllDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.vtencon.quoteshake.ui.settings.SettingsFragment"
@@ -20,4 +24,8 @@
         android:id="@+id/newQuotationFragment"
         android:name="com.vtencon.quoteshake.ui.newquotation.NewQuotationFragment"
         android:label="NewQuotationFragment" />
+    <dialog
+        android:id="@+id/deleteAllDialogFragment"
+        android:name="com.vtencon.quoteshake.ui.favourites.DeleteAllDialogFragment"
+        android:label="DeleteAllDialogFragment" />
 </navigation>

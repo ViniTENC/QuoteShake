@@ -12,6 +12,7 @@ import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,7 +21,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import com.vtencon.quoteshake.R
 import com.vtencon.quoteshake.databinding.ActivityMainBinding
-
+import com.vtencon.quoteshake.ui.newquotation.NewQuotationViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlin.getValue
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), MenuProvider {
     lateinit var navController : NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity(), MenuProvider {
         setupActionBarWithNavController(navController, appBarConfiguration)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, 0 , systemBars.right, systemBars.bottom)
             insets
         }
         // Ajustar el espacio alrededor del NavigationBar
@@ -83,8 +87,6 @@ class MainActivity : AppCompatActivity(), MenuProvider {
         menuInflater.inflate(R.menu.menu_about, menu)    }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        navController.navigate(R.id.aboutDialogFragment)
-
         return when (menuItem.itemId) {
             R.id.aboutDialogFragment -> {
                 navController.navigate(R.id.aboutDialogFragment)
