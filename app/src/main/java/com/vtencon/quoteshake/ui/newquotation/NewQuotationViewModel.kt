@@ -4,17 +4,20 @@ import android.R
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vtencon.quoteshake.ui.data.settings.SettingsRepository
 import com.vtencon.quoteshake.ui.domain.model.Quotation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository): ViewModel(){
+class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository, private val settingsRepository: SettingsRepository): ViewModel(){
     //Indica si hay algun mensaje de error a mostrar
     private val _error = MutableStateFlow<Throwable?>(null)
     val error : StateFlow<Throwable?> = _error
@@ -23,9 +26,11 @@ class NewQuotationViewModel @Inject constructor(private val instance : NewQuotat
         _error.value  = null
     }
 
-    // Propiedad para el nombre de usuario
-    private val _username = MutableStateFlow(getUserName())
-    val username: StateFlow<String> = _username.asStateFlow()
+    val username: StateFlow<String> = settingsRepository.getUserName().stateIn(
+        scope = viewModelScope,
+        initialValue = "",
+        started = SharingStarted.WhileSubscribed()
+    )
 
     // Método privado que genera un nombre aleatorio
     private fun getUserName(): String {

@@ -9,4 +9,5 @@ class SettingsRepositoryImpl @Inject constructor(val settingsDataSource: Setting
     val USERNAME_KEY = stringPreferencesKey("username") // Debe coincidir con el XML
     suspend fun getUserNameSnapshot(): String = settingsDataSource.getUserNameSnapshot()
     suspend fun setUserName(userName: String) { settingsDataSource.setUserName(userName)}
+    suspend fun getUserName() {settingsDataSource.getUserName()}
 }
