@@ -16,5 +16,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         savedInstanceState: Bundle?,
         rootKey: String?
     ) {
+        preferenceManager.preferenceDataStore = settingsPreferenceDataStore
         setPreferencesFromResource(R.xml.preference_settings, rootKey)    }
 }

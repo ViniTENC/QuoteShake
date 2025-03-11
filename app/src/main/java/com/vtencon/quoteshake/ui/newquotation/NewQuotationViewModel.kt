@@ -4,6 +4,7 @@ import android.R
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vtencon.quoteshake.ui.data.favourites.FavouritesRepository
 import com.vtencon.quoteshake.ui.data.settings.SettingsRepository
 import com.vtencon.quoteshake.ui.domain.model.Quotation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,30 +12,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
-class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository, private val settingsRepository: SettingsRepository): ViewModel(){
+class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository, private val settingsRepository: SettingsRepository, private val favouritesRepository: FavouritesRepository): ViewModel(){
     //Indica si hay algun mensaje de error a mostrar
     private val _error = MutableStateFlow<Throwable?>(null)
     val error : StateFlow<Throwable?> = _error
 
     fun resetError(){
         _error.value  = null
-    }
-
-    val username: StateFlow<String> = settingsRepository.getUserName().stateIn(
-        scope = viewModelScope,
-        initialValue = "",
-        started = SharingStarted.WhileSubscribed()
-    )
-
-    // Método privado que genera un nombre aleatorio
-    private fun getUserName(): String {
-        return setOf("Alice", "Bob", "Charlie", "David", "Emma", "").random()
     }
 
     // Propiedad MutableStateFlow para la nueva cita (Quotation)
@@ -50,18 +44,17 @@ class NewQuotationViewModel @Inject constructor(private val instance : NewQuotat
 
         viewModelScope.launch {
             try {
-                val result = instance.getNewQuotation() // Asegurar que devuelve un Result
+                val result =
+                    instance.getNewQuotation()
                 result.fold(
                     onSuccess = { quotation ->
                         _quotation.value = quotation
                         setShowMessage(show = false)
-                        _boton.value = true
                     },
                     onFailure = { error ->
                         _error.value = error
                         setShowMessage(show = true)
                         _quotation.value = null
-                        _boton.value = false
                     }
                 )
             } catch (e: Exception) {
@@ -69,7 +62,6 @@ class NewQuotationViewModel @Inject constructor(private val instance : NewQuotat
                 _error.value = e
                 setShowMessage(show = true)
                 _quotation.value = null
-                _boton.value = false
             } finally {
                 // Asegurar que estos valores se actualicen correctamente
                 _isLoadingQuotation.value = false
@@ -82,11 +74,28 @@ class NewQuotationViewModel @Inject constructor(private val instance : NewQuotat
     fun setShowMessage(show: Boolean) { // permite cambiar el estado de la vista
         _showMessage.update { show }
     }
-
-    private val _boton = MutableStateFlow<Boolean>(false)
-    val boton : StateFlow<Boolean> = _boton.asStateFlow()
-
+    val username = settingsRepository.getUserName().stateIn(scope = viewModelScope,
+        initialValue = "",
+        started = SharingStarted.WhileSubscribed())
+    val isAddToFavouritesVisible = quotation.flatMapLatest { currentQuotation ->
+        if (currentQuotation == null) flowOf(false)
+        else favouritesRepository.getFavouriteById(currentQuotation.id)
+            .map { quotationInDatabase ->
+                quotationInDatabase == null
+            }
+    }.stateIn(
+        scope = viewModelScope,
+        initialValue = false,
+        started = SharingStarted.WhileSubscribed()
+    )
     fun addToFavourites() {
-        _boton.value = false
+        viewModelScope.launch {
+            try {
+                favouritesRepository.addToDatabase(_quotation.value!!) // Añade la cita a la base de datos
+                getNewQuotation() // no entiendo porque a veces se vuelve a cargar y a veces no
+            } catch (e: Exception) {
+                _error.value = e // Manejo de errores
+            }
+        }
     }
 }

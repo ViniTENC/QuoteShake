@@ -32,13 +32,13 @@ class QuotationListAdapter(private val onItemClick: (String) -> Unit) : ListAdap
             oldItem: Quotation,
             newItem: Quotation
         ): Boolean {
-            return(oldItem.txt == newItem.txt)
+            return(oldItem.text == newItem.text)
         }
     }
 }
 class ViewHolder(private val binding: QuotationItemBinding, private val onItemClick: (String) -> Unit) : RecyclerView.ViewHolder(binding.root){
     fun bind(quotation: Quotation){
-        binding.tvQuotationText.text = quotation.txt
+        binding.tvQuotationText.text = quotation.text
         binding.tvQuotationAuthor.text = quotation.author // Asegura que se asigna el autor correctamente
     }
     init {

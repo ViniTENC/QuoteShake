@@ -39,9 +39,11 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.showMessage.collect { show ->
                     binding.tvGreeting.isVisible = show
+                    binding.tvGreeting.text = getString(R.string.welcomeMessage, viewModel.username.value.ifEmpty { "Guest" })
                 }
             }
         }
+
 
         // Observa isLoadingQuotation para mostrar/ocultar el icono de refresco
         viewLifecycleOwner.lifecycleScope.launch {
@@ -58,15 +60,17 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.quotation.collect { quotation ->
-                    binding.tvQuotationText.text = quotation?.txt
+                    binding.tvQuotationText.text = quotation?.text
                     binding.tvQuotationAuthor.text = if (quotation?.author?.isEmpty() == true) "Anonymous" else quotation?.author
                 }
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.boton.collect { isVisible ->
+                viewModel.isAddToFavouritesVisible.collect { isVisible ->
                     binding.fabFavourite.isVisible = isVisible
+                    if (!isVisible) {
+                    viewModel.getNewQuotation() } // aca esta lo mismo
                 }
             }
         }

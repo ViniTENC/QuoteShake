@@ -9,7 +9,7 @@
     <string name="aboutTitle">About</string>
     <string name="corazon">Like</string>
     <string name="empty">Empty</string>
-    <string name="welcomeMessage">“Hello!,\n\nRefresh to get a new quotation\n\n(swipe down or options menu)</string>
+    <string name="welcomeMessage">Hello %1$s!,\n\nRefresh to get a new quotation\n\n(swipe down or options menu)</string>
     <string name="anonymous" translatable="false">Anonymous\n</string>
     <string name="refresh" translatable="false">Refresh</string>
     <string name="delete_all_quotations">Delete All Quotations</string>

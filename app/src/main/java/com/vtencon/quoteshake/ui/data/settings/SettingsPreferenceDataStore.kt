@@ -7,22 +7,26 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class SettingsPreferenceDataStore @Inject constructor(val settingsRepository : SettingsRepository ) : PreferenceDataStore(){
+class SettingsPreferenceDataStore @Inject constructor(
+    private val settingsRepository: SettingsRepository
+) : PreferenceDataStore() {
+
     override fun putString(key: String?, value: String?) {
         if (key != null && value != null) {
             CoroutineScope(Dispatchers.IO).launch {
-                settingsRepository.saveSetting(key, value)
+                when (key) {
+                    "language" -> settingsRepository.setLanguage(value)
+                    "username" -> settingsRepository.setUserName(value)
+                }
             }
         }
     }
 
     override fun getString(key: String?, defValue: String?): String? {
-        return if (key != null) {
-            runBlocking(Dispatchers.IO) {
-                settingsRepository.getSetting(key) ?: defValue
-            }
-        } else {
-            defValue
+        return when (key) {
+            "language" -> runBlocking(Dispatchers.IO) { settingsRepository.getLanguageSnapshot() }
+            "username" -> runBlocking(Dispatchers.IO) { settingsRepository.getUserNameSnapshot() }
+            else -> defValue
         }
     }
 }

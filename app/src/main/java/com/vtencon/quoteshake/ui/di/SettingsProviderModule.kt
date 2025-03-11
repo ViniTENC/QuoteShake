@@ -19,15 +19,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
-
-@Module @InstallIn(SingletonComponent::class)
-abstract class SettingsProviderModule {
+@Module
+@InstallIn(SingletonComponent::class)
+class SettingsProviderModule {
     private val PREFERENCE_FILE_NAME = "settings_preferences"
+
     @Provides
     @Singleton
     fun provideSettingsPreferenceDataStore(settingsRepository: SettingsRepository): PreferenceDataStore {
         return SettingsPreferenceDataStore(settingsRepository)
     }
+
     @Provides
     @Singleton
     fun provideSettingsDataStore(
@@ -39,4 +41,5 @@ abstract class SettingsProviderModule {
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             produceFile = { context.preferencesDataStoreFile(PREFERENCE_FILE_NAME) }
         )
-    }}
+    }
+}

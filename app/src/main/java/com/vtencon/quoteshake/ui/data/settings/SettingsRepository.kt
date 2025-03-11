@@ -6,7 +6,12 @@ interface SettingsRepository {
     fun getUserName() : Flow<String>
     suspend fun getUserNameSnapshot(): String
     suspend fun setUserName(userName: String)
-    fun saveSetting(string1: String, string2: String)
-    fun getSetting(string: String): String?
+
+
+    // Nuevos métodos para gestionar el lenguaje
+    fun getLanguage(): Flow<String>
+    suspend fun getLanguageSnapshot(): String
+    suspend fun setLanguage(language: String)
+
 
 }
