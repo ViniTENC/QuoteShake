@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,6 +39,8 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourites) , MenuProvider 
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFavouritesBinding.bind(view)
 
+        super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Favourites Quotes"
 
         // Definir el comportamiento al hacer clic en un autor
         val onItemClick: (String) -> Unit = { authorName ->

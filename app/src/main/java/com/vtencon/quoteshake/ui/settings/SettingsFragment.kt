@@ -1,6 +1,7 @@
 package com.vtencon.quoteshake.ui.settings
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceFragmentCompat
 import com.vtencon.quoteshake.R
@@ -18,4 +19,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     ) {
         preferenceManager.preferenceDataStore = settingsPreferenceDataStore
         setPreferencesFromResource(R.xml.preference_settings, rootKey)    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Settings"
+    }
 }
