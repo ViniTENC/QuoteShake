@@ -8,7 +8,7 @@
     <string name="aboutTitle">Información</string>
     <string name="corazon">Corazón</string>
     <string name="delete_all_quotations">Borrar todas las frases</string>
-    <string name="welcomeMessage">¡Hola %1$s!\\n\\nRecarga para obtener una nueva cita\\n\\n(desliza hacia abajo o usa el menú de opciones)</string>
+    <string name="welcomeMessage">Hola %1$s!\n\nRecarga para obtener una nueva cita\n\n(desliza hacia abajo o usa el menú de opciones)</string>
     <string name="language_english">Ingles</string>
     <string name="language_russian">Ruso</string>
 </resources>
