@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vtencon.quoteshake.databinding.QuotationItemBinding
 import com.vtencon.quoteshake.ui.domain.model.Quotation
 
-class QuotationListAdapter(private val onItemClick: (String) -> Unit) : ListAdapter<Quotation, com.vtencon.quoteshake.ui.favourites.ViewHolder>(QuotationDiff) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): com.vtencon.quoteshake.ui.favourites.ViewHolder {
+class QuotationListAdapter(private val onItemClick: (String) -> Unit) : ListAdapter<Quotation, ViewHolder>(QuotationDiff) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(QuotationItemBinding.inflate(LayoutInflater.from(parent.context), parent,
             false), onItemClick)
     }
 
-    override fun onBindViewHolder(holder: com.vtencon.quoteshake.ui.favourites.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
     object QuotationDiff:  DiffUtil.ItemCallback<Quotation>() {

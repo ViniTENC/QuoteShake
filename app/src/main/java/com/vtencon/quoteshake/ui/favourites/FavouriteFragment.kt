@@ -31,8 +31,6 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourites) , MenuProvider 
     private val viewModel: FavouritesViewModel by activityViewModels()
     private var _binding: FragmentFavouritesBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: QuotationListAdapter
-    private lateinit var recyclerView: RecyclerView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentFavouritesBinding.bind(view)
