@@ -18,6 +18,7 @@ class QuotationListAdapter(private val onItemClick: (String) -> Unit) : ListAdap
         holder.bind(getItem(position))
     }
     object QuotationDiff:  DiffUtil.ItemCallback<Quotation>() {
+        // para poder chequear si ya existe ese quotation
         override fun areItemsTheSame(
             oldItem: Quotation,
             newItem: Quotation

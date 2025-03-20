@@ -38,15 +38,13 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.showMessage.collect { show ->
                     binding.tvGreeting.isVisible = show
-                    //binding.tvGreeting.text = getString(R.string.welcomeMessage, viewModel.username.value.ifEmpty { "Guest" })
                 }
             }
         }
-
+        // Observa el estado de username para actualizar el mensaje de bienvenida
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.username.collect { show ->
-                    //binding.tvGreeting.isVisible = show
                     binding.tvGreeting.text = getString(R.string.welcomeMessage, viewModel.username.value.ifEmpty { "Guest" })
                 }
             }
@@ -65,6 +63,7 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
         binding.swipeToRefresh.setOnRefreshListener {
             viewModel.getNewQuotation() // Llamar al método del ViewModel al refrescar
         }
+        // actualiza el quotation text y el quotation author con la quotation recibida
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.quotation.collect { quotation ->
@@ -73,6 +72,7 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
                 }
             }
         }
+        // para poder actualizar si se agrega a favoritos una quotation ya pedir otra
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.isAddToFavouritesVisible.collect { isVisible ->
@@ -82,6 +82,7 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
                 }
             }
         }
+        // verifica el error si es que lo hay
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.error.collect { error ->

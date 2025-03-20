@@ -10,7 +10,7 @@ import javax.inject.Inject
 class SettingsPreferenceDataStore @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) : PreferenceDataStore() {
-
+    // en ambos casos lo que hace es chequear el key, para poder eliminar el if
     override fun putString(key: String?, value: String?) {
         if (key != null && value != null) {
             CoroutineScope(Dispatchers.IO).launch {

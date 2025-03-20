@@ -10,6 +10,7 @@
     <!-- Título de About -->
     <TextView
         android:id="@+id/textAbout"
+        android:textAlignment="center"
         android:text="@string/about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

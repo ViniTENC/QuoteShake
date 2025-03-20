@@ -27,20 +27,9 @@ class FavouritesViewModel @Inject constructor(private val favouritesRepository: 
     private val _quotation = MutableStateFlow<Quotation?>(null)
     val quotation: StateFlow<Quotation?> = _quotation.asStateFlow()
 
-    //val isDeleteAllMenuVisible = favoriteQuotations.map { list ->
-    //    list.isNotEmpty()
-    //}.stateIn(
-    //    scope = viewModelScope,
-    //    started = SharingStarted.WhileSubscribed(),
-    //    initialValue = true
-    //)
     fun deleteAllQuotations(){
         viewModelScope.launch(Dispatchers.IO){favouritesRepository.deleteAllFavourites()}   }
     fun deleteQuotationAtPosition(position: Int) {
-        //val copia = _list.value.toList() // Copia inmutable de la lista actual
-        //if (position in copia.indices) { // Verifica que la posición es válida
-        //    _list.value = copia - copia[position] // Elimina el elemento y asigna la nueva lista
-        //}
         viewModelScope.launch{favouritesRepository.deleteFromDatabase(list.value.getOrNull(position)!!)}
     }
 }

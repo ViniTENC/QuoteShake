@@ -15,7 +15,7 @@ class NewQuotationDataSourceImpl @Inject constructor(retrofit: Retrofit) : NewQu
             retrofitQuotationService.getQuotation(language)
         } catch (e: Exception) {
             Response.error(
-                400, // Could be any other code and text, because we are not using it
+                400,
                 ResponseBody.create(MediaType.parse("text/plain"), e.toString())
             )
         }

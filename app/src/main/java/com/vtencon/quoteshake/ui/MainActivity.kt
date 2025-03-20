@@ -29,8 +29,10 @@ class MainActivity : AppCompatActivity(), MenuProvider {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         navController = binding.navHostFragment.getFragment<NavHostFragment>().navController
         (binding.bottomNavigationView as NavigationBarView).setupWithNavController(navController)
+
         setSupportActionBar(binding.toolbar)
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.favouriteFragment, R.id.settingsFragment, R.id.newQuotationFragment)
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity(), MenuProvider {
             v.setPadding(systemBars.left, 0 , systemBars.right, systemBars.bottom)
             insets
         }
+
         // Ajustar el espacio alrededor del NavigationBar
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigationView) { view, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.systemBars())

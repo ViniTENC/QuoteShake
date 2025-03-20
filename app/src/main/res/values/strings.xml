@@ -3,7 +3,7 @@
     <string name="new_quote" id="new_quote" >Get a new quotation</string>
     <string name="favourite"> Favourite quotations</string>
     <string name="settings">Settings</string>
-    <string name="about">QuoteShake     by Vicente     tenconivini@gmail.com     Developed for DADM 2024</string>
+    <string name="about">QuoteShake \n\nby Vicente Tenconi \n\ntenconivini@gmail.com  \n\nDeveloped for DADM 2025</string>
     <string name="logo_quoteshake" translatable="false">Logo QuoteShake</string>
     <string name="aboutTitle">About</string>
     <string name="corazon">Like</string>

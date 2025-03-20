@@ -89,7 +89,7 @@ class NewQuotationViewModel @Inject constructor(private val instance : NewQuotat
         viewModelScope.launch {
             try {
                 favouritesRepository.addToDatabase(_quotation.value!!) // Añade la cita a la base de datos
-                getNewQuotation() // no entiendo porque a veces se vuelve a cargar y a veces no
+                getNewQuotation()
             } catch (e: Exception) {
                 _error.value = e // Manejo de errores
             }
