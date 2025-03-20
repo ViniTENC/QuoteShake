@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository, val settingsRepository: SettingsRepository, private val favouritesRepository: FavouritesRepository): ViewModel(){
+class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository, settingsRepository: SettingsRepository, private val favouritesRepository: FavouritesRepository): ViewModel(){
     //Indica si hay algun mensaje de error a mostrar
     private val _error = MutableStateFlow<Throwable?>(null)
     val error : StateFlow<Throwable?> = _error
