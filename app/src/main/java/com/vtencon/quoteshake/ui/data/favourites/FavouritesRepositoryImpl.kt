@@ -1,6 +1,5 @@
 package com.vtencon.quoteshake.ui.data.favourites
 
-import com.vtencon.quoteshake.ui.data.favourites.model.DataBaseQuotationDto
 import com.vtencon.quoteshake.ui.data.favourites.model.toDomain
 import com.vtencon.quoteshake.ui.data.favourites.model.toDatabaseDto
 import com.vtencon.quoteshake.ui.domain.model.Quotation

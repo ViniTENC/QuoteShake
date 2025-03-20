@@ -1,7 +1,5 @@
 package com.vtencon.quoteshake.ui.newquotation
 
-import android.R
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vtencon.quoteshake.ui.data.favourites.FavouritesRepository
@@ -19,7 +17,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class NewQuotationViewModel @Inject constructor(private val instance : NewQuotationRepository, private val settingsRepository: SettingsRepository, private val favouritesRepository: FavouritesRepository): ViewModel(){

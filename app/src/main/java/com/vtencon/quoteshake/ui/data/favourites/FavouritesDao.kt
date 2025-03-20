@@ -17,11 +17,11 @@ interface FavouritesDao {
     suspend fun addToDataBase( quote : DataBaseQuotationDto)
     @Delete
     suspend fun deleteFromDataBase(quote : DataBaseQuotationDto)
-    @Query("SELECT * FROM ${FavouriteEntry.TABLE_NAME}")
+    @Query("SELECT * FROM ${TABLE_NAME}")
     fun getAllFavourites(): Flow<List<DataBaseQuotationDto>>
-    @Query("SELECT * FROM ${FavouriteEntry.TABLE_NAME} WHERE ${FavouriteEntry.COLUMN_ID} = :id")
+    @Query("SELECT * FROM ${TABLE_NAME} WHERE ${FavouriteEntry.COLUMN_ID} = :id")
     fun getFavouriteById(id: String): Flow<Quotation?>
 
-    @Query("DELETE FROM ${FavouriteEntry.TABLE_NAME}")
+    @Query("DELETE FROM ${TABLE_NAME}")
     fun deleteAllFavourites()
 }

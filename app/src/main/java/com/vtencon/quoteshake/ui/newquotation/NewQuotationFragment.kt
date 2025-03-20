@@ -1,9 +1,6 @@
 package com.vtencon.quoteshake.ui.newquotation
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.util.Log
-import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -41,6 +38,15 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.showMessage.collect { show ->
                     binding.tvGreeting.isVisible = show
+                    //binding.tvGreeting.text = getString(R.string.welcomeMessage, viewModel.username.value.ifEmpty { "Guest" })
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.username.collect { show ->
+                    //binding.tvGreeting.isVisible = show
                     binding.tvGreeting.text = getString(R.string.welcomeMessage, viewModel.username.value.ifEmpty { "Guest" })
                 }
             }

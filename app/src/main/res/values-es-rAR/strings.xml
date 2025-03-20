@@ -5,13 +5,10 @@
     <string name="favourite">Frases favoritas</string>
     <string name="settings">Ajustes</string>
     <string name="about">QuoteShake     por Vicente     tenconivini@gmail.com     Desarrollado para DADM 2024</string>
-    <string name="scroll_content">Ejemplo</string>
     <string name="aboutTitle">Información</string>
     <string name="corazon">Corazón</string>
-    <string name="empty">Vacío</string>
     <string name="delete_all_quotations">Borrar todas las frases</string>
-    <string name="welcomeMessage">\"¡Hola!\\n\\nRecarga para obtener una nueva cita\\n\\n(desliza hacia abajo o usa el menú de opciones)\"</string>
+    <string name="welcomeMessage">¡Hola %1$s!\\n\\nRecarga para obtener una nueva cita\\n\\n(desliza hacia abajo o usa el menú de opciones)</string>
     <string name="language_english">Ingles</string>
-    <string name="language_spanish">Español</string>
     <string name="language_russian">Ruso</string>
 </resources>

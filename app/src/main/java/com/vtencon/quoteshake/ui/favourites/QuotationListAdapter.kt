@@ -5,11 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.vtencon.quoteshake.databinding.QuotationItemBinding
 import com.vtencon.quoteshake.ui.domain.model.Quotation
-
-private fun ViewHolder.bind(quotation: Quotation) {}
 
 class QuotationListAdapter(private val onItemClick: (String) -> Unit) : ListAdapter<Quotation, com.vtencon.quoteshake.ui.favourites.ViewHolder>(QuotationDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): com.vtencon.quoteshake.ui.favourites.ViewHolder {

@@ -22,7 +22,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class SettingsProviderModule {
-    private val PREFERENCE_FILE_NAME = "settings_preferences"
+    private val preferenceFileName = "settings_preferences"
 
     @Provides
     @Singleton
@@ -39,7 +39,7 @@ class SettingsProviderModule {
             corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
             migrations = listOf(),
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-            produceFile = { context.preferencesDataStoreFile(PREFERENCE_FILE_NAME) }
+            produceFile = { context.preferencesDataStoreFile(preferenceFileName) }
         )
     }
 }

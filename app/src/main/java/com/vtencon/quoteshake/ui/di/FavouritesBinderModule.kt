@@ -3,8 +3,6 @@ package com.vtencon.quoteshake.ui.di
 import com.vtencon.quoteshake.ui.data.favourites.FavouritesDataSource
 import com.vtencon.quoteshake.ui.data.favourites.FavouritesRepository
 import com.vtencon.quoteshake.ui.data.favourites.FavouritesRepositoryImpl
-import com.vtencon.quoteshake.ui.data.settings.SettingsRepository
-import com.vtencon.quoteshake.ui.data.settings.SettingsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

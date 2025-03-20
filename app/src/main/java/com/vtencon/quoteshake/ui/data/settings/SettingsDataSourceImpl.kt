@@ -13,29 +13,29 @@ import java.io.IOException
 import javax.inject.Inject
 
 class SettingsDataSourceImpl @Inject constructor(private val dataStore : DataStore<Preferences>) : SettingsDataSource{
-    val USERNAME_KEY = stringPreferencesKey("username") // Debe coincidir con el XML
-    private val LANGUAGE_KEY = stringPreferencesKey("language") // Nueva constante para el lenguaje
+    val usernameKey = stringPreferencesKey("username") // Debe coincidir con el XML
+    private val languageKey = stringPreferencesKey("language") // Nueva constante para el lenguaje
 
     override fun getUserName(): Flow<String> {
-        return getStringPreference(USERNAME_KEY)
+        return getStringPreference(usernameKey)
     }
 
-    override suspend fun getUserNameSnapshot(): String = getStringPreferenceSnapshot(USERNAME_KEY)
+    override suspend fun getUserNameSnapshot(): String = getStringPreferenceSnapshot(usernameKey)
 
     override suspend fun setUserName(userName: String) {
-        setStringPreference(USERNAME_KEY, userName)
+        setStringPreference(usernameKey, userName)
     }
 
 
     override fun getLanguage(): Flow<String> {
-        return getStringPreference(LANGUAGE_KEY, "en") // El valor por defecto es "en"
+        return getStringPreference(languageKey, "en") // El valor por defecto es "en"
     }
 
-    override suspend fun getLanguageSnapshot(): String = getStringPreferenceSnapshot(LANGUAGE_KEY, "en")
+    override suspend fun getLanguageSnapshot(): String = getStringPreferenceSnapshot(languageKey, "en")
 
 
     override suspend fun setLanguage(language: String) {
-        setStringPreference(LANGUAGE_KEY, language)
+        setStringPreference(languageKey, language)
     }
     // Métodos privados para reutilizar la lógica de manejo de preferencias
     private fun getStringPreference(key: Preferences.Key<String>, defaultValue: String = ""): Flow<String> {

@@ -9,11 +9,7 @@ class ConnectivityChecker @Inject constructor(private val connectivityManager: C
     fun isConnectionAvailable(): Boolean{
         val capabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities?.hasTransport(TRANSPORT_WIFI) == true ||
-            capabilities?.hasTransport(TRANSPORT_CELLULAR) == true
-        ){
-            return true
-        }
-        return false
+        return capabilities?.hasTransport(TRANSPORT_WIFI) == true ||
+                capabilities?.hasTransport(TRANSPORT_CELLULAR) == true
     }
 }

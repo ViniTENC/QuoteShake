@@ -2,7 +2,6 @@ package com.vtencon.quoteshake.ui.settings
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceFragmentCompat
 import com.vtencon.quoteshake.R
 import com.vtencon.quoteshake.ui.data.settings.SettingsPreferenceDataStore

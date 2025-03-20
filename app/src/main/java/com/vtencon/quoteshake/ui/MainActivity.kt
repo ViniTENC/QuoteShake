@@ -1,6 +1,5 @@
 package com.vtencon.quoteshake.ui
 
-import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
 import android.view.Menu
@@ -12,7 +11,6 @@ import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,9 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import com.vtencon.quoteshake.R
 import com.vtencon.quoteshake.databinding.ActivityMainBinding
-import com.vtencon.quoteshake.ui.newquotation.NewQuotationViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.getValue
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), MenuProvider {
     lateinit var navController : NavController

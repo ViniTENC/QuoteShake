@@ -1,4 +1,3 @@
 package com.vtencon.quoteshake.ui.utils
 
-class NoInternetException(string: String) : Exception() {
-}
+class NoInternetException(string: String) : Exception()
