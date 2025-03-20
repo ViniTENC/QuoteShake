@@ -29,7 +29,7 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNewQuotationBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "QuoteShake"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.quoteshake)
         requireActivity().addMenuProvider(this,
             viewLifecycleOwner, Lifecycle.State.RESUMED)
 
@@ -68,7 +68,9 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.quotation.collect { quotation ->
                     binding.tvQuotationText.text = quotation?.text
-                    binding.tvQuotationAuthor.text = if (quotation?.author?.isEmpty() == true) "Anonymous" else quotation?.author
+                    binding.tvQuotationAuthor.text = if (quotation?.author?.isEmpty() == true) getString(
+                        R.string.anonymous
+                    ) else quotation?.author
                 }
             }
         }
@@ -88,9 +90,9 @@ class NewQuotationFragment : Fragment(R.layout.fragment_new_quotation), MenuProv
                 viewModel.error.collect { error ->
                     error?.let {
                         val message = if (it is NoInternetException) {
-                            "No hay conexión a Internet. Verifica tu conexión e intenta de nuevo."
+                            getString(R.string.noInternet)
                         } else {
-                            "Ocurrió un error al obtener la cotización."
+                            getString(R.string.errorFake)
                         }
 
                         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()

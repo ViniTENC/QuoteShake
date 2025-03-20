@@ -9,6 +9,19 @@
     <string name="corazon">Corazón</string>
     <string name="delete_all_quotations">Borrar todas las frases</string>
     <string name="welcomeMessage">Hola %1$s!\n\nRecarga para obtener una nueva cita\n\n(desliza hacia abajo o usa el menú de opciones)</string>
+    <string name="anonymousWarning">No es posible mostrar información si el autor es anónimo</string>
     <string name="language_english">Ingles</string>
     <string name="language_russian">Ruso</string>
+    <string name="actionNotSuport">No es posible gestionar la acción solicitada</string>
+    <string name="titleFavourite">Citas favoritas</string>
+    <string name="quoteshake">QuoteShake</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="noInternet">No hay conexión a Internet. Verifica tu conexión e intenta de nuevo.</string>
+    <string name="errorFake">Ocurrió un error al obtener la cotización.</string>
+    <string name="delete_all_favourite_quotations">Borrar todas las citas favoritas</string>
+    <string name="quotations">citas?</string>
+    <string name="do_you_really_want_to_delete_all_your">Desea borrar todas sus</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
 </resources>

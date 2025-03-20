@@ -36,14 +36,14 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourites) , MenuProvider 
         _binding = FragmentFavouritesBinding.bind(view)
 
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Favourites Quotes"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.favourite)
 
         // Definir el comportamiento al hacer clic en un autor
         val onItemClick: (String) -> Unit = { authorName ->
-            if (authorName.equals("Anonymous", ignoreCase = true)) {
+            if (authorName.equals(getString(R.string.anonymous), ignoreCase = true)) {
                 Snackbar.make(
                     binding.root,
-                    "No es posible mostrar información si el autor es anónimo",
+                    getString(R.string.anonymousWarning),
                     Snackbar.LENGTH_LONG
                 ).show()
             } else {
@@ -54,7 +54,7 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourites) , MenuProvider 
                 } catch (e: ActivityNotFoundException) {
                     Snackbar.make(
                         binding.root,
-                        "No es posible gestionar la acción solicitada",
+                        getString(R.string.actionNotSuport),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
@@ -109,10 +109,10 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourites) , MenuProvider 
 
     override fun onPrepareMenu(menu: Menu) {
         super.onPrepareMenu(menu)
-
-        val deleteAllItem = menu.findItem(R.id.action_favouritesFragment_to_deleteAllDialog)
-        deleteAllItem?.isVisible = viewModel.favoriteQuotations.value.isNotEmpty()
+        val deleteAllItem = menu.findItem(R.id.deleteAllQuotations)
+        deleteAllItem?.isVisible = !viewModel.favoriteQuotations.value.isNullOrEmpty()
     }
+
     private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
         override fun onMove(
             recyclerView: RecyclerView,
